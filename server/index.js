@@ -11,6 +11,7 @@ const app = express();
 app.use(express.json());
 app.use(cors({
     origin:"*",
+    methods : ["POST", "GET", "PUT", "DELETE"],
     credentials:true
 }));
 app.use(morgan('tiny'));
