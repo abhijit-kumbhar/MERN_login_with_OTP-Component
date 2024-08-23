@@ -29,7 +29,7 @@ app.use('/api',router)
 connect().then(() => {
     try {
         app.listen(port, () => {
-            console.log(`server connected to httt://localhost: ${port}`);
+            console.log(`server started at port ${port}`);
         })
     } catch (error) {
         console.log("Cannot connect to the server")
