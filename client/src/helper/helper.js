@@ -1,7 +1,8 @@
 import axios from 'axios';
 import {jwtDecode} from 'jwt-decode'
 
-axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN;
+// axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN;
+axios.defaults.baseURL = "https://login-with-otp-api.vercel.app";
 axios.defaults.withCredentials = true;
 
 /*Make api request*/
