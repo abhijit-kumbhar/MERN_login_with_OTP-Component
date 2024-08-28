@@ -4,7 +4,7 @@ const morgan = require('morgan');
 // const { errors } = require('mongodb-memory-server');
 const connect = require('./database/conn.js')
 const router = require('./router/route.js');
-const { PORT } = require('./config.js');
+const PORT = require('./config.js');
 
 const app = express();
 
@@ -12,7 +12,7 @@ const app = express();
 app.use(express.json());
 app.use(cors({
     origin: "https://login-with-otp-dusky.vercel.app",
-    methods : ["POST", "GET", "PUT", "DELETE"],
+    // methods : ["POST", "GET", "PUT", "DELETE"],
     credentials:true
 }));
 app.use(morgan('tiny'));
