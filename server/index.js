@@ -11,10 +11,7 @@ const app = express();
 app.use(express.json());
 app.use(cors({
     origin:"https://login-with-otp-dusky.vercel.app",
-<<<<<<< HEAD
-=======
     methods : ["POST", "GET", "PUT", "DELETE"],
->>>>>>> fcc6bd0d03a49213b3bed66436586498d55275e2
     credentials:true
 }));
 app.use(morgan('tiny'));
