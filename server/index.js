@@ -10,7 +10,7 @@ const app = express();
 /*middleware*/
 app.use(express.json());
 app.use(cors({
-    origin:"*",
+    origin:"https://login-with-otp-dusky.vercel.app",
     credentials:true
 }));
 app.use(morgan('tiny'));
