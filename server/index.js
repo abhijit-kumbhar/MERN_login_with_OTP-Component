@@ -4,21 +4,21 @@ const morgan = require('morgan');
 // const { errors } = require('mongodb-memory-server');
 const connect = require('./database/conn.js')
 const router = require('./router/route.js');
-const PORT = require('./config.js');
+const { PORT } = require('./config.js');
 
 const app = express();
 
 /*middleware*/
 app.use(express.json());
 app.use(cors({
-    origin: "https://login-with-otp-dusky.vercel.app",
-    // methods : ["POST", "GET", "PUT", "DELETE"],
+    origin:"http://login-with-otp-dusky.vercel.app",
+    methods : ["POST", "GET", "PUT", "DELETE"],
     credentials:true
 }));
 app.use(morgan('tiny'));
 app.disable('x-powered-by') //less hackers know our stack
 
-const port = PORT;
+const port = 8080;
 
 app.get('/', (req, res) => {
     res.status(201).json("Home GET Request")
