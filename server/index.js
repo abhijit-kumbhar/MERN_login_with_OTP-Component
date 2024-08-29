@@ -18,7 +18,7 @@ app.use(cors({
 app.use(morgan('tiny'));
 app.disable('x-powered-by') //less hackers know our stack
 
-const port = 8080 || PORT;
+const port = 8080;
 
 app.get('/', (req, res) => {
     res.status(201).json("Home GET Request")
