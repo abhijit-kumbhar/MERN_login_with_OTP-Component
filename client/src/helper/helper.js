@@ -20,7 +20,7 @@ export async function getUsername() {
 /* authenticate function*/
 export async function authenticate(username) {
     try {
-        return await axios.post('https://login-with-otp-api.vercel.app/api/authenticate', { username })
+        return await axios.post('/api/authenticate', { username })
     } catch (error) {
         return { error: "Username doesn't exist...!" }
     }
@@ -29,7 +29,7 @@ export async function authenticate(username) {
 /* get user details*/
 export async function getUser({username}) {
     try {
-        const {data}  = await axios.get(`https://login-with-otp-api.vercel.app/api/user/${username}`);
+        const {data}  = await axios.get(`/api/user/${username}`);
         return {data} ;
     } catch (error) {
         return { error: "Password doesn't Match...!" }
@@ -39,7 +39,7 @@ export async function getUser({username}) {
 /* register user*/
 export async function registerUser(credentials) {
     try {
-        const { data: { msg }, status } = await axios.post('https://login-with-otp-api.vercel.app/api/register', credentials);
+        const { data: { msg }, status } = await axios.post('/api/register', credentials);
         let { username, email } = credentials;
 
         // send email
@@ -57,7 +57,7 @@ export async function registerUser(credentials) {
 export async function verifyPassword({ username, password }) {
     try {
         if (username) {
-            const { data } = await axios.post('https://login-with-otp-api.vercel.app/api/login', { username, password })
+            const { data } = await axios.post('/api/login', { username, password })
             return Promise.resolve({ data });
         }
 
@@ -70,7 +70,7 @@ export async function verifyPassword({ username, password }) {
 export async function updateUser(responce) {
     try {
         const token = await localStorage.getItem('token');
-        const data = await axios.put('https://login-with-otp-api.vercel.app/api/updateuser', responce, { headers: { "Authorization": `Bearer ${token}` } })
+        const data = await axios.put('/api/updateuser', responce, { headers: { "Authorization": `Bearer ${token}` } })
         return Promise.resolve({ data });
 
     } catch (error) {
@@ -81,12 +81,12 @@ export async function updateUser(responce) {
 // generate OTP
 export async function generateOTP(username) {
     try {
-        const { data: { code }, status } = await axios.get(`https://login-with-otp-api.vercel.app/api/generateOTP?${username}`, { params: { username }});
+        const { data: { code }, status } = await axios.get(`/api/generateOTP?${username}`, { params: { username }});
         //send mail with the OTP
         if (status === 201) {
             let { data: { email } } = await getUser({ username })
             let text = `Your Password Recovery OTP is ${code}. Verify and recover your Password.`;
-            await axios.post('https://login-with-otp-api.vercel.app/api/registerMail', { username, userEmail: email, text, subject: "Password Recovery OTP" })
+            await axios.post('/api/registerMail', { username, userEmail: email, text, subject: "Password Recovery OTP" })
             return Promise.resolve(code);
         }
 
@@ -98,7 +98,7 @@ export async function generateOTP(username) {
 //verify OTP
 export async function verifyOTP({ username, code }) {
     try {
-        const { data, status } = await axios.get('https://login-with-otp-api.vercel.app/api/verifyOTP', { params: { username, code } });
+        const { data, status } = await axios.get('/api/verifyOTP', { params: { username, code } });
         return { data, status };
 
     } catch (error) {
@@ -109,7 +109,7 @@ export async function verifyOTP({ username, code }) {
 //reset the Password function
 export async function resetPassword({ username, password }) {
     try {
-        const { data, status } = await axios.put('https://login-with-otp-api.vercel.app/api/resetPassword', { username, password });
+        const { data, status } = await axios.put('/api/resetPassword', { username, password });
         return Promise.resolve({ data, status })
     } catch (error) {
         return Promise.reject({ error })
